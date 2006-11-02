@@ -1,0 +1,11 @@
+.cvsignore
+CVS
+lib/Games/ScottAdams/Manual.html
+crystal/crystal.sao
+tutorial/Tutorial.pod
+tutorial/Tutorial.html
+tutorial/Tutorial.man
+tutorial/Tutorial.ps
+tutorial/.*\.sao
+tutorial/pod2htmd.tmp
+tutorial/pod2htmi.tmp
