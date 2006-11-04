@@ -7,7 +7,7 @@ WriteMakefile(
     VERSION_FROM => 'lib/Games/ScottAdams.pm', # finds $VERSION
     AUTHOR       => 'Mike Taylor <mike@miketaylor.org.uk>',
     ABSTRACT     => 'Compiler to produce Scott Adams-style adventure games',
-    EXE_FILES    => [ 'bin/sac' ],
+    EXE_FILES    => [ 'bin/sac', 'bin/sad' ],
 );
 
 sub MY::postamble {

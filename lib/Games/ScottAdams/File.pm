@@ -1,4 +1,4 @@
-# $Id: File.pm,v 1.1 2006/10/31 20:31:21 mike Exp $
+# $Id: File.pm,v 1.3 2006/11/03 20:59:19 mike Exp $
 
 # File.pm - a cleverer IO::File-alike that does pushback
 
@@ -27,6 +27,7 @@ sub new {
 	filename => $filename,
 	linenumber => 0,
 	pushback => [],
+	buf => "",		# for getint() and getstring() only
     }, $class;
 }
 
@@ -58,6 +59,50 @@ sub ungetline {
     my($line) = @_;
 
     push @{ $this->{pushback} }, $line;
+}
+
+
+# Calls to getint() and getstring() may be freely intermixed, but
+# won't play nice if mixed with getline() and ungetline() calls.
+
+sub getint {
+    my $this = shift();
+    $this->_refresh();
+    die "getint($this) on non-int buffer '" . $this->{buf} . "'"
+	if $this->{buf} !~ /^\d/;
+
+    $this->{buf} =~ s/(\d+)//;
+    return $1;
+}
+
+sub getstring {
+    my $this = shift();
+    $this->_refresh();
+
+    $this->{buf} =~ s/^[""]//
+	or die "getstring($this) on non-string buffer '" . $this->{buf} . "'";
+
+    my $string = "";
+    while ($this->{buf} !~ /[""]/) {
+	$string .= $this->{buf};
+	$this->{buf} = $this->getline();
+    }
+
+    $this->{buf} =~ s/^(.*?)[""]//
+	or die "can't happen";
+
+    $string .= $1;
+    $string =~ s/[``"]/"/g;
+    return $string;
+}
+
+# PRIVATE to getint() and getstring()
+sub _refresh {
+    my $this = shift();
+    while ($this->{buf} =~ /^\s*$/) {
+	$this->{buf} = $this->getline();
+    }
+    $this->{buf} =~ s/^\s*//;
 }
 
 

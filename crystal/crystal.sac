@@ -1,4 +1,4 @@
-# $Id: crystal.sac,v 1.4 2006/11/01 23:57:01 mike Exp $
+# $Id: crystal.sac,v 1.6 2006/11/02 00:46:16 mike Exp $
 
 # crystal.sa -- Scott Adams source file for _Crystal of Chaos_
 
@@ -60,7 +60,7 @@ set_flag 1
 msg Welcome to `CRYSTAL OF CHAOS`
 msg Written by Mike Taylor, starting Monday 10th April 2001
 msg This is a demo for the `sac` adventure system --
-msg See http://www.miketaylor.org.uk/tech/advent/sac.html
+msg See http://www.miketaylor.org.uk/tech/advent/sac/
 nl
 msg Your task is to find the six crown jewels of the kingdom and store
 msg them in this hut.  They are: a platinum chain, a gold crown, a

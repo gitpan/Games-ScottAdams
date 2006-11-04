@@ -1,4 +1,4 @@
-# $Id: Action.pm,v 1.3 2006/11/01 22:59:52 mike Exp $
+# $Id: Action.pm,v 1.5 2006/11/04 10:11:11 mike Exp $
 
 # Action.pm - an action in a Scott Adams game.
 
@@ -75,7 +75,8 @@ sub ARG_ITEM { 3 }		# argument identifies an item
 sub ARG_ITEMROOM { 4 }		# arguments identify an item and a room
 sub ARG_ITEMITEM { 5 }		# arguments identify two items
 
-my %_cond = (
+use vars qw(%_cond %_res);	# Global as they need to be visible to "sad"
+%_cond = (
 	     carried =>		[ 1, ARG_ITEM ],
 	     here =>		[ 2, ARG_ITEM ],
 	     accessible =>	[ 3, ARG_ITEM ],
@@ -104,7 +105,7 @@ my %_cond = (
 	     counter_eq =>	[ 19, ARG_NUM ],
 	     );
 
-my %_res = (
+%_res = (
 	    get =>		[ 52, ARG_ITEM ],
 	    drop =>		[ 53, ARG_ITEM ],
 	    moveto =>		[ 54, ARG_ROOM ],
@@ -244,7 +245,7 @@ sub _lookup {
 	    if $caption eq 'condition';
 
 	my $mnum = $game->resolve_message($arg);
-	return ($mnum <= 51 ? $mnum : $mnum+51);
+	return ($mnum <= 51 ? $mnum : $mnum+50);
     }
 
     my $ref = $href->{$op};

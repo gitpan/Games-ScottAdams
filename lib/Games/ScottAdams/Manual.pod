@@ -1,4 +1,4 @@
-# $Id: Manual.pod,v 1.2 2006/11/02 00:26:33 mike Exp $
+# $Id: Manual.pod,v 1.3 2006/11/02 09:19:20 mike Exp $
 
 # Manual.pm - reference manual for the Scott Adams adventure compiler
 
@@ -139,7 +139,7 @@ the room description with an asterisk (C<*>), which is not printed but
 inhibits the automatic initial string.  For example, the room
 definition
 
-	%room lake
+	%room ledge1
 	*I'm on a narrow ledge by a chasm. Across the chasm is
 	the Throne-room
 

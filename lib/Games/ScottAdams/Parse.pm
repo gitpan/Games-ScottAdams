@@ -1,4 +1,4 @@
-# $Id: Parse.pm,v 1.2 2006/10/31 21:51:43 mike Exp $
+# $Id: Parse.pm,v 1.3 2006/11/03 21:00:13 mike Exp $
 
 # Parse.pm - parsing functions for Scott Adams game files.
 
@@ -119,7 +119,7 @@ sub _parse_exit {
     }
 
     my $roomname = $room->name();
-    $dir = lc($dir);
+    $dir = lc(substr($dir, 0, 1));
     if ($dir !~ /^[nsewud]$/) {
 	$fh->warn("ignoring %exit '$dir'->'$dest' at '$roomname'");
 	return;
@@ -146,6 +146,15 @@ sub _parse_item {
     }
 
     my $desc = $fh->getline(1);
+    while (defined (my $line = $fh->getline(1))) {
+	if ($line =~ /^\s*%/) {
+	    $fh->ungetline($line);
+	    last;
+	}
+
+	$desc .= "\n$line";
+    }
+
     my $num = @{ $this->{items} }; # 0-based index of item to be added
     if (0) {
 	### No need to do this, is there?
